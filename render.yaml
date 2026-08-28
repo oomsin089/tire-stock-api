@@ -1,0 +1,13 @@
+# Render Blueprint: กด "New > Blueprint" แล้วชี้มาที่ repo นี้ Render จะอ่านไฟล์นี้เอง
+services:
+  - type: web
+    name: tire-stock-api
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # ใส่ค่าเองใน dashboard (connection string ของ Neon)
+      - key: ALLOWED_ORIGINS
+        sync: false
